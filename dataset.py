@@ -7,13 +7,8 @@ from PIL import Image
 from sklearn.utils import shuffle
 
 
-def get_images(imagename_list):
-
-	images = []
-	for iName in imagename_list:
-		im = Image.open(iName)
-		images.append(im)
-	return images
+def get_image(imagename):
+	return Image.open(imagename)
 
 
 def _get_filenames_and_classes(dataset_dir):
@@ -48,20 +43,21 @@ def _get_filenames_and_classes(dataset_dir):
 def get_datasets(dataset_dir, image_size):
 
 	filenames, class_names = _get_filenames_and_classes(dataset_dir=dataset_dir)
+	data = []
 	labels = []
 	for i in filenames:
-
+		data.append(get_image(i))
 		if "/AR/" in i:
 			labels.append([1, 0])
 		else:
 			labels.append([0, 1])
 
-	filenames, labels = shuffle(filenames, labels)
-	split_at = int(len(filenames) * 0.8)
-	train_files = filenames[:split_at]
+	data, labels = shuffle(data, labels)
+	split_at = int(len(data) * 0.8)
+	train_files = data[:split_at]
 	train_labels = labels[:split_at]
 
-	val_files = filenames[split_at:]
+	val_files = data[split_at:]
 	val_labels = labels[split_at:]
 	return ARDataset(data=train_files, labels=train_labels, image_size=image_size), ARDataset(data=val_files, labels=val_labels, image_size=image_size)
 
@@ -91,8 +87,7 @@ class ARDataset(object):
 			self.batch_index = 0
 		batched_data, batched_labels = self.data[self.batch_index*batch_size: self.batch_index*batch_size + batch_size], self.labels[self.batch_index*batch_size: self.batch_index*batch_size + batch_size]
 		self.batch_index += 1
-		images = get_images(batched_data)
-		images = preprocess(images, image_size=self.image_size)
+		images = preprocess(batched_data, image_size=self.image_size)
 
 		return images, batched_labels
 
