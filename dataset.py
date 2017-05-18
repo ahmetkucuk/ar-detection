@@ -8,8 +8,10 @@ from sklearn.utils import shuffle
 
 
 def get_image(imagename):
-	return Image.open(imagename)
-
+	temp = Image.open(imagename)
+    	keep = temp.copy()
+	temp.close()
+	return keep
 
 def _get_filenames_and_classes(dataset_dir):
 	"""Returns a list of filenames and inferred class names.
@@ -51,7 +53,8 @@ def get_datasets(dataset_dir, image_size):
 			labels.append([1, 0])
 		else:
 			labels.append([0, 1])
-
+	print("Finished Reading images")
+	data = preprocess(data, image_size)
 	data, labels = shuffle(data, labels)
 	split_at = int(len(data) * 0.8)
 	train_files = data[:split_at]
@@ -59,6 +62,7 @@ def get_datasets(dataset_dir, image_size):
 
 	val_files = data[split_at:]
 	val_labels = labels[split_at:]
+	
 	return ARDataset(data=train_files, labels=train_labels, image_size=image_size), ARDataset(data=val_files, labels=val_labels, image_size=image_size)
 
 
@@ -73,6 +77,17 @@ def preprocess(images, image_size):
 		processed_images.append(im_array)
 	return processed_images
 
+class GPUDataset(object):
+
+	def __init__(self, data, labels, image_size):
+		with tf.device('/gpu:0'):
+  			gpu_data = tf.constant(data)
+			gpu_labels = tf.constant(labels)
+
+	def next_batch(self, batch_size):
+		if self.batch_index*batch_size + batch_size > len(self.data):
+			self.batch_index = 0
+		
 
 class ARDataset(object):
 

@@ -22,7 +22,6 @@ def train(args):
 	network_fn = alexnet.alexnet_v2
 	images_placeholder = tf.placeholder("float", [None, image_size, image_size, 1])
 	labels_placeholder = tf.placeholder("float", [None, 2])
-
 	logits, end_points = network_fn(images_placeholder)
 	cross_entropy = tf.reduce_mean(
 		tf.nn.softmax_cross_entropy_with_logits(labels=labels_placeholder, logits=logits))
@@ -43,21 +42,21 @@ def train(args):
 		sess.run(tf.global_variables_initializer())
 		dataset, validation_dataset = get_datasets(dataset_dir=dataset_dir, image_size=image_size)
 		n_of_patches = dataset.size()
-		iter = 0
-		epoch_count = 0
+		print(n_of_patches)
+		iter = 1
+		epoch_count = 1
 
 		while (iter * batch_size) / n_of_patches < epoches:
-			if (iter * batch_size) / n_of_patches > epoch_count:
-				epoch_count = (iter * batch_size) / n_of_patches
 
 			images, labels = dataset.next_batch(batch_size)
 			sess.run([train_step], feed_dict={images_placeholder: images, labels_placeholder: labels})
 
-			if epoch_count % 10:
+			if (iter * batch_size) / n_of_patches > epoch_count:
+				epoch_count = (iter * batch_size) / n_of_patches
 				summary, ce, acc = sess.run([merged, cross_entropy, accuracy], feed_dict={images_placeholder: images, labels_placeholder: labels})
 				train_writer.add_summary(summary=summary, global_step=iter)
-				print("training loss: " + str(ce))
-				print("training acc: " + str(acc))
+				print("Epoches: " + str(epoch_count) + " training loss: " + str(ce))
+				print("Epoches: " + str(epoch_count) + " training acc: " + str(acc))
 
 				total_val = 0
 				val_iterations = int(validation_dataset.size() / batch_size)
@@ -66,7 +65,9 @@ def train(args):
 					summary, ce, acc = sess.run([merged, cross_entropy, accuracy], feed_dict={images_placeholder: val_images, labels_placeholder: val_labels})
 					total_val = total_val + acc
 					test_writer.add_summary(summary=summary, global_step=iter)
-				print("Val accuracy: " + str(float(total_val / val_iterations)))
+				print("Epoches: " + str(epoch_count) + " Val accuracy: " + str(float(total_val / val_iterations)))
+			if iter % 10 == 0:
+				print('At Iteration: ' + str(iter))
 			iter = iter + 1
 if __name__ == '__main__':
 	train(sys.argv[1:])
