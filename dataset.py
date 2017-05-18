@@ -9,7 +9,7 @@ from sklearn.utils import shuffle
 
 def get_image(imagename):
 	temp = Image.open(imagename)
-    	keep = temp.copy()
+	keep = temp.copy()
 	temp.close()
 	return keep
 
@@ -63,7 +63,7 @@ def get_datasets(dataset_dir, image_size):
 	val_files = data[split_at:]
 	val_labels = labels[split_at:]
 	
-	return ARDataset(data=train_files, labels=train_labels, image_size=image_size), ARDataset(data=val_files, labels=val_labels, image_size=image_size)
+	return ARDataset(data=train_files, labels=train_labels), ARDataset(data=val_files, labels=val_labels)
 
 
 def preprocess(images, image_size):
@@ -77,34 +77,42 @@ def preprocess(images, image_size):
 		processed_images.append(im_array)
 	return processed_images
 
+
 class GPUDataset(object):
 
-	def __init__(self, data, labels, image_size):
-		with tf.device('/gpu:0'):
-  			gpu_data = tf.constant(data)
+	def __init__(self, data, labels):
+		self.n_of_records = len(data)
+		with tf.device('/cpu:0'):
+			gpu_data = tf.constant(np.array(data))
 			gpu_labels = tf.constant(labels)
+			self.image, self.label = tf.train.slice_input_producer(
+				[gpu_data, gpu_labels])
+			self.label = tf.cast(self.label, tf.int32)
 
 	def next_batch(self, batch_size):
-		if self.batch_index*batch_size + batch_size > len(self.data):
-			self.batch_index = 0
-		
+		print("hereee")
+		images, labels = tf.train.batch(
+			[self.image, self.label], batch_size=batch_size)
+		print("hereee2")
+		return images, labels
+
+	def size(self):
+		return self.n_of_records
+
 
 class ARDataset(object):
 
-	def __init__(self, data, labels, image_size):
+	def __init__(self, data, labels):
 		self.data = data
 		self.labels = labels
 		self.batch_index = 0
-		self.image_size = image_size
 
 	def next_batch(self, batch_size):
 		if self.batch_index*batch_size + batch_size > len(self.data):
 			self.batch_index = 0
 		batched_data, batched_labels = self.data[self.batch_index*batch_size: self.batch_index*batch_size + batch_size], self.labels[self.batch_index*batch_size: self.batch_index*batch_size + batch_size]
 		self.batch_index += 1
-		images = preprocess(batched_data, image_size=self.image_size)
-
-		return images, batched_labels
+		return batched_data, batched_labels
 
 	def size(self):
 		return len(self.data)
