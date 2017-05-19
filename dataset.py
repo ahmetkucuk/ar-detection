@@ -77,7 +77,7 @@ def preprocess(images, image_size):
 		processed_images.append(im_array)
 	return processed_images
 
-
+'''
 class GPUDataset(object):
 
 	def __init__(self, data, labels):
@@ -98,7 +98,7 @@ class GPUDataset(object):
 
 	def size(self):
 		return self.n_of_records
-
+'''
 
 class ARDataset(object):
 
