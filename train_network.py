@@ -70,8 +70,8 @@ def train(args):
 			if iter % 100 == 0:
 				print('At Iteration: ' + str(iter))
 			iter = iter + 1
-#if __name__ == '__main__':
-#	train(sys.argv[1:])
+if __name__ == '__main__':
+	train(sys.argv[1:])
 
-args = ["/Users/ahmetkucuk/Documents/test", "/Users/ahmetkucuk/Documents/log_test/", 0.01, 224, 5, 1000]
-train(args)
+#args = ["/Users/ahmetkucuk/Documents/test", "/Users/ahmetkucuk/Documents/log_test/", 0.01, 224, 5, 1000]
+#train(args)
