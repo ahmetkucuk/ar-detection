@@ -1,4 +1,5 @@
 import alexnet
+import lenet
 import tensorflow as tf
 from dataset import get_datasets
 import sys
@@ -19,10 +20,10 @@ def train(args):
 	optimizer = tf.train.AdamOptimizer(learning_rate)
 	tf.logging.set_verbosity(tf.logging.INFO)
 
-	network_fn = alexnet.alexnet_v2
+	network_fn = lenet.lenet
 	images_placeholder = tf.placeholder("float", [None, image_size, image_size, 1])
 	labels_placeholder = tf.placeholder("float", [None, 2])
-	logits, end_points = network_fn(images_placeholder)
+	logits, end_points = network_fn(images_placeholder, num_classes=2)
 	cross_entropy = tf.reduce_mean(
 		tf.nn.softmax_cross_entropy_with_logits(labels=labels_placeholder, logits=logits))
 	with tf.name_scope("evaluations"):
@@ -33,7 +34,6 @@ def train(args):
 	with tf.name_scope("evaluations"):
 		tf.summary.scalar('accuracy', accuracy)
 
-
 	with tf.Session() as sess:
 		merged = tf.summary.merge_all()
 		train_writer = tf.summary.FileWriter(log_dir + '/train', sess.graph)
@@ -42,10 +42,10 @@ def train(args):
 		sess.run(tf.global_variables_initializer())
 		dataset, validation_dataset = get_datasets(dataset_dir=dataset_dir, image_size=image_size)
 		n_of_patches = dataset.size()
-		print(n_of_patches)
 		iter = 1
 		epoch_count = 1
-
+		print("Number of Patches: " + str(n_of_patches))
+		print("Number of Validation Patches: " + str(validation_dataset.size()))
 		while (iter * batch_size) / n_of_patches < epoches:
 
 			images, labels = dataset.next_batch(batch_size)
@@ -60,14 +60,18 @@ def train(args):
 
 				total_val = 0
 				val_iterations = int(validation_dataset.size() / batch_size)
+				print("Number of Patches: " + str(val_iterations))
 				for i in range(val_iterations):
 					val_images, val_labels = validation_dataset.next_batch(batch_size)
 					summary, ce, acc = sess.run([merged, cross_entropy, accuracy], feed_dict={images_placeholder: val_images, labels_placeholder: val_labels})
 					total_val = total_val + acc
 					test_writer.add_summary(summary=summary, global_step=iter)
 				print("Epoches: " + str(epoch_count) + " Val accuracy: " + str(float(total_val / val_iterations)))
-			if iter % 10 == 0:
+			if iter % 100 == 0:
 				print('At Iteration: ' + str(iter))
 			iter = iter + 1
-if __name__ == '__main__':
-	train(sys.argv[1:])
+#if __name__ == '__main__':
+#	train(sys.argv[1:])
+
+args = ["/Users/ahmetkucuk/Documents/test", "/Users/ahmetkucuk/Documents/log_test/", 0.01, 224, 5, 1000]
+train(args)
