@@ -66,7 +66,7 @@ def train(args):
 					total_val = total_val + acc
 					test_writer.add_summary(summary=summary, global_step=iter)
 				print("Epoches: " + str(epoch_count) + " Val accuracy: " + str(float(total_val / val_iterations)))
-			if iter % 10 == 0:
+			if iter % 100 == 0:
 				print('At Iteration: ' + str(iter))
 			iter = iter + 1
 if __name__ == '__main__':
