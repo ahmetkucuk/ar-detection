@@ -34,6 +34,8 @@ def train(args):
 	with tf.name_scope("evaluations"):
 		tf.summary.scalar('accuracy', accuracy)
 
+	saver = tf.train.Saver()
+
 	with tf.Session() as sess:
 		merged = tf.summary.merge_all()
 		train_writer = tf.summary.FileWriter(log_dir + '/train', sess.graph)
@@ -67,6 +69,10 @@ def train(args):
 					total_val = total_val + acc
 					test_writer.add_summary(summary=summary, global_step=iter)
 				print("Epoches: " + str(epoch_count) + " Val accuracy: " + str(float(total_val / val_iterations)))
+
+				if epoch_count % 100 == 0:
+					save_path = saver.save(sess, log_dir + "model_%d.ckpt" % epoch_count)
+					print("Model saved in file: %s" % save_path)
 			if iter % 100 == 0:
 				print('At Iteration: ' + str(iter))
 			iter = iter + 1
