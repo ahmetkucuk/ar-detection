@@ -30,8 +30,11 @@ class SolarImageLabeler(object):
 		self.labels = []
 
 	def get_patch(self, i, j):
-		return self.image[i*self.patch_size:(i*self.patch_size) + self.patch_size,
-			j*self.patch_size:(j*self.patch_size) + self.patch_size]
+		x1 = i*self.patch_size
+		x2 = (i*self.patch_size) + self.patch_size
+		y1 = j*self.patch_size
+		y2 = (j*self.patch_size) + self.patch_size
+		return self.image[y1:y2, x1:x2]
 
 	def add_label(self, i, j, type):
 		color = "grey"
@@ -44,7 +47,11 @@ class SolarImageLabeler(object):
 		elif type == "SG":
 			color = "blue"
 
-		self.labels.append([[self.patch_size*i, self.patch_size*j, self.patch_size*i + self.patch_size, self.patch_size*j + self.patch_size], color])
+		x1 = i*self.patch_size
+		x2 = (i*self.patch_size) + self.patch_size
+		y1 = j*self.patch_size
+		y2 = (j*self.patch_size) + self.patch_size
+		self.labels.append([[x1, y1, x2, y2], color])
 
 	def save_fig(self, image_path):
 		pil_image = Image.fromarray(self.image)
@@ -60,8 +67,13 @@ def test_labeler():
 
 	l = SolarImageLabeler(path, 256)
 
+	patch = l.get_patch(8, 10)
+	pil_image = Image.fromarray(patch)
+	pil_image.save("test2.png")
+
 	l.add_label(10, 10, "AR")
 	l.add_label(9, 10, "CH")
 	l.add_label(8, 10, "FL")
 	l.add_label(7, 10, "SG")
 	l.save_fig(new_image)
+test_labeler()
