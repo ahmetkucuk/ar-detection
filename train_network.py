@@ -23,7 +23,7 @@ def train(args):
 	network_fn = lenet.lenet
 	images_placeholder = tf.placeholder("float", [None, image_size, image_size, 1])
 	labels_placeholder = tf.placeholder("float", [None, 2])
-	logits, end_points = network_fn(images_placeholder, num_classes=2)
+	logits, end_points = network_fn(images_placeholder, num_classes=2, is_training=True)
 	cross_entropy = tf.reduce_mean(
 		tf.nn.softmax_cross_entropy_with_logits(labels=labels_placeholder, logits=logits))
 	with tf.name_scope("evaluations"):
@@ -33,7 +33,6 @@ def train(args):
 	accuracy = tf.reduce_mean(tf.cast(tf.equal(tf.argmax(labels_placeholder, 1), tf.argmax(logits, 1)), tf.float32))
 	with tf.name_scope("evaluations"):
 		tf.summary.scalar('accuracy', accuracy)
-
 
 	with tf.Session() as sess:
 		merged = tf.summary.merge_all()
