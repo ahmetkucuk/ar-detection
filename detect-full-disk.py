@@ -7,7 +7,7 @@ from PIL import Image
 import lenet
 
 image_size = 4096
-patch_size = 512
+patch_size = 128
 input_image_size = 128
 
 
@@ -20,6 +20,15 @@ def preprocess(image, image_size):
 	return im_array
 
 
+def variables():
+	variables_to_restore = {}
+	for var in tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES):
+		print(var.name)
+		if not ("Adam" in var.name or "beta" in var.name):
+			variables_to_restore[var.name] = var
+	return variables_to_restore
+
+
 def main(args):
 
 	imagepath = args[0]
@@ -28,33 +37,36 @@ def main(args):
 	labeler = SolarImageLabeler(imagepath, patch_size)
 	patch_count = int(image_size/patch_size)
 
-	for i in range(patch_count):
-		for j in range(patch_count):
-			patch_image = labeler.get_patch(i, j)
-			input_image = preprocess(patch_image, image_size)
+	images_placeholder = tf.placeholder("float", [None, input_image_size, input_image_size, 1])
+	network_fn = lenet.lenet
+	logits, end_points = network_fn(images_placeholder, num_classes=2, is_training=False)
+	preds = tf.nn.softmax(logits)
 
-			with tf.Session() as sess:
-				network_fn = lenet.lenet
+	saver = tf.train.Saver()
+	with tf.Session() as sess:
 
-				images_placeholder = tf.placeholder("float", [None, image_size, image_size, 1])
-				logits, end_points = network_fn(images_placeholder, num_classes=2)
+		print(tf.train.latest_checkpoint(model_ckpt))
+		saver.restore(sess, tf.train.latest_checkpoint(model_ckpt))
+
+		for i in range(patch_count):
+			for j in range(patch_count):
+				patch_image = labeler.get_patch(i, j)
+				input_image = preprocess(patch_image, input_image_size)
 				#labels_placeholder = tf.placeholder("float", [None, 2])
-				sess.run(tf.global_variables_initializer())
-				saver = tf.train.Saver()
-				saver.restore(sess, model_ckpt)
 
-				preds = tf.nn.softmax(logits)
-				preds_results = sess.run(preds, feed_dict={images_placeholder: input_image})
+				preds_results = sess.run(preds, feed_dict={images_placeholder: [input_image]})
 				print(preds_results)
 
 				labels = ['AR', 'QS']
-				print(labels[preds_results.argmax(1)])
-				# if label != "QS":
-				# 	labeler.add_label(i, j, label)
-	labeler.save_fig(outputimagepath)
+				label_index = preds_results.argmax(1)[0]
+				label = labels[label_index]
+				if label == "AR":
+					labeler.add_label(i, j, label)
+		labeler.save_fig(outputimagepath)
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
 
-# args = ["data/2013_05_10__23_59_47_34__SDO_AIA_AIA_171.png", "test.png", "/Users/ahmetkucuk/Documents/log_test/mode_2.ckpt"]
-# main(args)
+# args = ["data/2013_05_10__23_59_47_34__SDO_AIA_AIA_171.png", "test.png", "/Users/ahmetkucuk/Documents/log_test/"]
+main(args)
+#python "/home/ahmet/workspace/data/ar-detection/2013_05_10__23_59_47_34__SDO_AIA_AIA_171.png", "data/labels.png", "/home/ahmet/workspace/tensorboard/lenet/mode_100.ckpt"

@@ -34,7 +34,6 @@ def train(args):
 	with tf.name_scope("evaluations"):
 		tf.summary.scalar('accuracy', accuracy)
 
-	saver = tf.train.Saver()
 
 	with tf.Session() as sess:
 		merged = tf.summary.merge_all()
@@ -42,6 +41,9 @@ def train(args):
 		test_writer = tf.summary.FileWriter(log_dir + '/test', sess.graph)
 
 		sess.run(tf.global_variables_initializer())
+
+		saver = tf.train.Saver()
+
 		dataset, validation_dataset = get_datasets(dataset_dir=dataset_dir, image_size=image_size)
 		n_of_patches = dataset.size()
 		iter = 1
@@ -70,14 +72,14 @@ def train(args):
 					test_writer.add_summary(summary=summary, global_step=iter)
 				print("Epoches: " + str(epoch_count) + " Val accuracy: " + str(float(total_val / val_iterations)))
 
-				if epoch_count % 1 == 0:
-					save_path = saver.save(sess, log_dir + "model_%d.ckpt" % epoch_count)
+				if epoch_count % 2 == 0:
+					save_path = saver.save(sess, log_dir + "model.ckpt", global_step=iter)
 					print("Model saved in file: %s" % save_path)
 			if iter % 100 == 0:
 				print('At Iteration: ' + str(iter))
 			iter = iter + 1
-# if __name__ == '__main__':
-# 	train(sys.argv[1:])
+if __name__ == '__main__':
+	train(sys.argv[1:])
 
-args = ["/Users/ahmetkucuk/Documents/test", "/Users/ahmetkucuk/Documents/log_test/", 0.01, 224, 5, 3]
-train(args)
+# args = ["/Users/ahmetkucuk/Documents/test", "/Users/ahmetkucuk/Documents/log_test/", 0.01, 128, 5, 3]
+# train(args)
