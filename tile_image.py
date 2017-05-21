@@ -76,4 +76,4 @@ def test_labeler():
 	l.add_label(8, 10, "FL")
 	l.add_label(7, 10, "SG")
 	l.save_fig(new_image)
-test_labeler()
+#test_labeler()
