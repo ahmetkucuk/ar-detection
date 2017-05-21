@@ -71,7 +71,7 @@ def train(args):
 					test_writer.add_summary(summary=summary, global_step=iter)
 				print("Epoches: " + str(epoch_count) + " Val accuracy: " + str(float(total_val / val_iterations)))
 
-				if epoch_count % 2 == 0:
+				if epoch_count % 100 == 0:
 					save_path = saver.save(sess, log_dir + "model.ckpt", global_step=iter)
 					print("Model saved in file: %s" % save_path)
 			if iter % 100 == 0:
