@@ -70,14 +70,14 @@ def train(args):
 					test_writer.add_summary(summary=summary, global_step=iter)
 				print("Epoches: " + str(epoch_count) + " Val accuracy: " + str(float(total_val / val_iterations)))
 
-				if epoch_count % 100 == 0:
+				if epoch_count % 1 == 0:
 					save_path = saver.save(sess, log_dir + "model_%d.ckpt" % epoch_count)
 					print("Model saved in file: %s" % save_path)
 			if iter % 100 == 0:
 				print('At Iteration: ' + str(iter))
 			iter = iter + 1
-if __name__ == '__main__':
-	train(sys.argv[1:])
+# if __name__ == '__main__':
+# 	train(sys.argv[1:])
 
-#args = ["/Users/ahmetkucuk/Documents/test", "/Users/ahmetkucuk/Documents/log_test/", 0.01, 224, 5, 1000]
-#train(args)
+args = ["/Users/ahmetkucuk/Documents/test", "/Users/ahmetkucuk/Documents/log_test/", 0.01, 224, 5, 3]
+train(args)
