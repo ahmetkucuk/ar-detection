@@ -1,0 +1,165 @@
+nohup: ignoring input
+2017-05-18 23:21:47.294543: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2017-05-18 23:21:47.294602: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2017-05-18 23:21:47.294611: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2017-05-18 23:21:47.294617: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2017-05-18 23:21:47.294624: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2017-05-18 23:21:47.733421: I tensorflow/core/common_runtime/gpu/gpu_device.cc:887] Found device 0 with properties: 
+name: Tesla P100-PCIE-16GB
+major: 6 minor: 0 memoryClockRate (GHz) 1.3285
+pciBusID 0000:02:00.0
+Total memory: 15.89GiB
+Free memory: 392.25MiB
+2017-05-18 23:21:47.733558: W tensorflow/stream_executor/cuda/cuda_driver.cc:485] creating context when one is currently active; existing: 0x4ed3050
+2017-05-18 23:21:48.145508: I tensorflow/core/common_runtime/gpu/gpu_device.cc:887] Found device 1 with properties: 
+name: Tesla P100-PCIE-16GB
+major: 6 minor: 0 memoryClockRate (GHz) 1.3285
+pciBusID 0000:82:00.0
+Total memory: 15.89GiB
+Free memory: 514.25MiB
+2017-05-18 23:21:48.145643: I tensorflow/core/common_runtime/gpu/gpu_device.cc:779] Peer access not supported between device ordinals 0 and 1
+2017-05-18 23:21:48.145661: I tensorflow/core/common_runtime/gpu/gpu_device.cc:779] Peer access not supported between device ordinals 1 and 0
+2017-05-18 23:21:48.145679: I tensorflow/core/common_runtime/gpu/gpu_device.cc:908] DMA: 0 1 
+2017-05-18 23:21:48.145688: I tensorflow/core/common_runtime/gpu/gpu_device.cc:918] 0:   Y N 
+2017-05-18 23:21:48.145694: I tensorflow/core/common_runtime/gpu/gpu_device.cc:918] 1:   N Y 
+2017-05-18 23:21:48.145710: I tensorflow/core/common_runtime/gpu/gpu_device.cc:977] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:02:00.0)
+2017-05-18 23:21:48.145718: I tensorflow/core/common_runtime/gpu/gpu_device.cc:977] Creating TensorFlow device (/gpu:1) -> (device: 1, name: Tesla P100-PCIE-16GB, pci bus id: 0000:82:00.0)
+2017-05-18 23:21:58.574456: W tensorflow/core/common_runtime/bfc_allocator.cc:273] Allocator (GPU_0_bfc) ran out of memory trying to allocate 16.0KiB.  Current allocation summary follows.
+2017-05-18 23:21:58.574542: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (256): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574585: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (512): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574600: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (1024): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574626: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (2048): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574641: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (4096): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574673: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (8192): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574689: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (16384): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574704: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (32768): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574718: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (65536): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574733: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (131072): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574747: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (262144): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574762: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (524288): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574776: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (1048576): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574791: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (2097152): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574805: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (4194304): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574820: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (8388608): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574834: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (16777216): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574849: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (33554432): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574863: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (67108864): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574877: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (134217728): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574893: I tensorflow/core/common_runtime/bfc_allocator.cc:643] Bin (268435456): 	Total Chunks: 0, Chunks in use: 0 0B allocated for chunks. 0B client-requested for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2017-05-18 23:21:58.574910: I tensorflow/core/common_runtime/bfc_allocator.cc:660] Bin for 16.0KiB was 16.0KiB, Chunk State: 
+2017-05-18 23:21:58.574925: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc00000 of size 1280
+2017-05-18 23:21:58.574944: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc00500 of size 256
+2017-05-18 23:21:58.574957: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc00600 of size 256
+2017-05-18 23:21:58.574968: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc00700 of size 256
+2017-05-18 23:21:58.574981: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc00800 of size 768
+2017-05-18 23:21:58.574992: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc00b00 of size 256
+2017-05-18 23:21:58.575011: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc00c00 of size 1536
+2017-05-18 23:21:58.575023: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc01200 of size 256
+2017-05-18 23:21:58.575035: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc01300 of size 1536
+2017-05-18 23:21:58.575047: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc01900 of size 256
+2017-05-18 23:21:58.575059: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc01a00 of size 1024
+2017-05-18 23:21:58.575070: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc01e00 of size 256
+2017-05-18 23:21:58.575082: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc01f00 of size 256
+2017-05-18 23:21:58.575094: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc02000 of size 16384
+2017-05-18 23:21:58.575106: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc06000 of size 256
+2017-05-18 23:21:58.575117: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc06100 of size 256
+2017-05-18 23:21:58.575129: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc06200 of size 16384
+2017-05-18 23:21:58.575141: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc0a200 of size 256
+2017-05-18 23:21:58.575152: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc0a300 of size 256
+2017-05-18 23:21:58.575163: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc0a400 of size 256
+2017-05-18 23:21:58.575175: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc0a500 of size 256
+2017-05-18 23:21:58.575186: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc0a600 of size 256
+2017-05-18 23:21:58.575198: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc0a700 of size 30976
+2017-05-18 23:21:58.575210: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bc12000 of size 1228800
+2017-05-18 23:21:58.575223: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bd3e000 of size 2654208
+2017-05-18 23:21:58.575234: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042bfc6000 of size 5308416
+2017-05-18 23:21:58.575247: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042c4d6000 of size 3538944
+2017-05-18 23:21:58.575258: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Chunk at 0x1042c836000 of size 188784640
+2017-05-18 23:21:58.575270: I tensorflow/core/common_runtime/bfc_allocator.cc:693]      Summary of in-use Chunks by size: 
+2017-05-18 23:21:58.575286: I tensorflow/core/common_runtime/bfc_allocator.cc:696] 15 Chunks of size 256 totalling 3.8KiB
+2017-05-18 23:21:58.575300: I tensorflow/core/common_runtime/bfc_allocator.cc:696] 1 Chunks of size 768 totalling 768B
+2017-05-18 23:21:58.575312: I tensorflow/core/common_runtime/bfc_allocator.cc:696] 1 Chunks of size 1024 totalling 1.0KiB
+2017-05-18 23:21:58.575325: I tensorflow/core/common_runtime/bfc_allocator.cc:696] 1 Chunks of size 1280 totalling 1.2KiB
+2017-05-18 23:21:58.575338: I tensorflow/core/common_runtime/bfc_allocator.cc:696] 2 Chunks of size 1536 totalling 3.0KiB
+2017-05-18 23:21:58.575352: I tensorflow/core/common_runtime/bfc_allocator.cc:696] 2 Chunks of size 16384 totalling 32.0KiB
+2017-05-18 23:21:58.575377: I tensorflow/core/common_runtime/bfc_allocator.cc:696] 1 Chunks of size 30976 totalling 30.2KiB
+2017-05-18 23:21:58.575392: I tensorflow/core/common_runtime/bfc_allocator.cc:696] 1 Chunks of size 1228800 totalling 1.17MiB
+2017-05-18 23:21:58.575405: I tensorflow/core/common_runtime/bfc_allocator.cc:696] 1 Chunks of size 2654208 totalling 2.53MiB
+2017-05-18 23:21:58.575418: I tensorflow/core/common_runtime/bfc_allocator.cc:696] 1 Chunks of size 3538944 totalling 3.38MiB
+2017-05-18 23:21:58.575430: I tensorflow/core/common_runtime/bfc_allocator.cc:696] 1 Chunks of size 5308416 totalling 5.06MiB
+2017-05-18 23:21:58.575445: I tensorflow/core/common_runtime/bfc_allocator.cc:696] 1 Chunks of size 188784640 totalling 180.04MiB
+2017-05-18 23:21:58.575459: I tensorflow/core/common_runtime/bfc_allocator.cc:700] Sum Total of in-use chunks: 192.25MiB
+2017-05-18 23:21:58.575476: I tensorflow/core/common_runtime/bfc_allocator.cc:702] Stats: 
+Limit:                   201588736
+InUse:                   201588736
+MaxInUse:                201588736
+NumAllocs:                      28
+MaxAllocSize:            188784640
+
+2017-05-18 23:21:58.575496: W tensorflow/core/common_runtime/bfc_allocator.cc:277] ***********************************************************xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+2017-05-18 23:21:58.575528: W tensorflow/core/framework/op_kernel.cc:1142] Internal: Dst tensor is not initialized.
+2017-05-18 23:21:58.575670: E tensorflow/core/common_runtime/executor.cc:644] Executor failed to create kernel. Internal: Dst tensor is not initialized.
+	 [[Node: alexnet_v2/fc6/biases/Adam/Initializer/Const = Const[_class=["loc:@alexnet_v2/fc6/biases"], dtype=DT_FLOAT, value=Tensor<type: float shape: [4096] values: 0 0 0...>, _device="/job:localhost/replica:0/task:0/gpu:0"]()]]
+Traceback (most recent call last):
+  File "train_network.py", line 73, in <module>
+    train(sys.argv[1:])
+  File "train_network.py", line 42, in train
+    sess.run(tf.global_variables_initializer())
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 778, in run
+    run_metadata_ptr)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 982, in _run
+    feed_dict_string, options, run_metadata)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 1032, in _do_run
+    target_list, options, run_metadata)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/client/session.py", line 1052, in _do_call
+    raise type(e)(node_def, op, message)
+tensorflow.python.framework.errors_impl.InternalError: Dst tensor is not initialized.
+	 [[Node: alexnet_v2/fc6/biases/Adam/Initializer/Const = Const[_class=["loc:@alexnet_v2/fc6/biases"], dtype=DT_FLOAT, value=Tensor<type: float shape: [4096] values: 0 0 0...>, _device="/job:localhost/replica:0/task:0/gpu:0"]()]]
+
+Caused by op u'alexnet_v2/fc6/biases/Adam/Initializer/Const', defined at:
+  File "train_network.py", line 73, in <module>
+    train(sys.argv[1:])
+  File "train_network.py", line 31, in train
+    train_step = optimizer.minimize(cross_entropy)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/optimizer.py", line 325, in minimize
+    name=name)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/optimizer.py", line 446, in apply_gradients
+    self._create_slots([_get_variable_for(v) for v in var_list])
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/adam.py", line 122, in _create_slots
+    self._zeros_slot(v, "m", self._name)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/optimizer.py", line 766, in _zeros_slot
+    named_slots[_var_key(var)] = slot_creator.create_zeros_slot(var, op_name)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/slot_creator.py", line 174, in create_zeros_slot
+    colocate_with_primary=colocate_with_primary)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/slot_creator.py", line 146, in create_slot_with_initializer
+    dtype)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/training/slot_creator.py", line 66, in _create_slot_var
+    validate_shape=validate_shape)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/variable_scope.py", line 1049, in get_variable
+    use_resource=use_resource, custom_getter=custom_getter)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/variable_scope.py", line 948, in get_variable
+    use_resource=use_resource, custom_getter=custom_getter)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/variable_scope.py", line 356, in get_variable
+    validate_shape=validate_shape, use_resource=use_resource)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/variable_scope.py", line 341, in _true_getter
+    use_resource=use_resource)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/variable_scope.py", line 714, in _get_single_variable
+    validate_shape=validate_shape)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/variables.py", line 197, in __init__
+    expected_shape=expected_shape)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/variables.py", line 275, in _init_from_args
+    initial_value(), name="initial_value", dtype=dtype)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/variable_scope.py", line 690, in <lambda>
+    shape.as_list(), dtype=dtype, partition_info=partition_info)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/ops/init_ops.py", line 63, in __call__
+    dtype=dtype, shape=shape)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/constant_op.py", line 106, in constant
+    attrs={"value": tensor_value, "dtype": dtype_value}, name=name).outputs[0]
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 2336, in create_op
+    original_op=self._default_original_op, op_def=op_def)
+  File "/usr/local/lib/python2.7/dist-packages/tensorflow/python/framework/ops.py", line 1228, in __init__
+    self._traceback = _extract_stack()
+
+InternalError (see above for traceback): Dst tensor is not initialized.
+	 [[Node: alexnet_v2/fc6/biases/Adam/Initializer/Const = Const[_class=["loc:@alexnet_v2/fc6/biases"], dtype=DT_FLOAT, value=Tensor<type: float shape: [4096] values: 0 0 0...>, _device="/job:localhost/replica:0/task:0/gpu:0"]()]]
+
