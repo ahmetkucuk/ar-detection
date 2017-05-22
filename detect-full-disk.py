@@ -5,10 +5,20 @@ from tile_image import SolarImageLabeler
 import tensorflow as tf
 from PIL import Image
 import lenet
+import os
 
 image_size = 4096
 patch_size = 128
 input_image_size = 128
+
+
+def get_image_filenames(directory):
+	image_filenames = []
+	for filename in os.listdir(directory):
+		if ".jpg" in filename or ".png" in filename:
+			path = os.path.join(directory, filename)
+			image_filenames.append([filename, path])
+	return image_filenames
 
 
 def preprocess(image, image_size):
@@ -30,13 +40,33 @@ def variables():
 	return variables_to_restore
 
 
-def main(args):
+def label_image(imagepath, outputimagepath, session, images_placeholder, preds):
 
-	imagepath = args[0]
-	outputimagepath = args[1]
-	model_ckpt = args[2]
 	labeler = SolarImageLabeler(imagepath, patch_size)
 	patch_count = int(image_size/patch_size)
+
+	for i in range(patch_count):
+		for j in range(patch_count):
+			patch_image = labeler.get_patch(i, j)
+			input_image = preprocess(patch_image, input_image_size)
+
+			preds_results = session.run(preds, feed_dict={images_placeholder: [input_image]})
+
+			labels = ['AR', 'QS']
+			label_index = preds_results.argmax(1)[0]
+			label = labels[label_index]
+			if label == "AR":
+				labeler.add_label(i, j, label)
+	labeler.save_fig(outputimagepath)
+
+
+def main(args):
+
+	images_dir = args[0]
+	outputimagepath = args[1]
+	model_ckpt = args[2]
+
+	imagename_by_filepath = get_image_filenames(images_dir)
 
 	images_placeholder = tf.placeholder("float", [None, input_image_size, input_image_size, 1])
 	network_fn = lenet.lenet
@@ -45,30 +75,17 @@ def main(args):
 
 	saver = tf.train.Saver()
 	with tf.Session() as sess:
-
-		print(tf.train.latest_checkpoint(model_ckpt))
 		saver.restore(sess, tf.train.latest_checkpoint(model_ckpt))
+		for imagename in imagename_by_filepath:
+			name = imagename[0]
+			path = imagename[1]
+			label_image(path, outputimagepath + name, sess, images_placeholder, preds)
 
-		for i in range(patch_count):
-			for j in range(patch_count):
-				patch_image = labeler.get_patch(i, j)
-				input_image = preprocess(patch_image, input_image_size)
-				#labels_placeholder = tf.placeholder("float", [None, 2])
-
-				preds_results = sess.run(preds, feed_dict={images_placeholder: [input_image]})
-				print(preds_results)
-
-				labels = ['AR', 'QS']
-				label_index = preds_results.argmax(1)[0]
-				label = labels[label_index]
-				if label == "AR":
-					labeler.add_label(i, j, label)
-		labeler.save_fig(outputimagepath)
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
 
 # args = ["data/20170211_001146_4096_0171.jpg", "test.png", "/Users/ahmetkucuk/Documents/log_test/"]
-# args = ["data/2013_05_10__23_59_47_34__SDO_AIA_AIA_171.png", "test.png", "/Users/ahmetkucuk/Documents/log_test/"]
+# args = ["data/unlabeled/", "data/labeled/", "/Users/ahmetkucuk/Documents/log_test/"]
 # main(args)
 # python "/home/ahmet/workspace/data/ar-detection/2013_05_10__23_59_47_34__SDO_AIA_AIA_171.png", "data/labels.png", "/home/ahmet/workspace/tensorboard/lenet/mode_100.ckpt"
