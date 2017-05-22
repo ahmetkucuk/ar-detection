@@ -11,7 +11,7 @@ def toRGB(im):
 
 
 def read_image(image_path):
-	return toRGB(misc.imread(image_path, flatten=False))
+	return toRGB(misc.imread(image_path, flatten=True))
 
 
 def draw_rectangle(draw, coordinates, color, width=1):
@@ -54,6 +54,7 @@ class SolarImageLabeler(object):
 		self.labels.append([[x1, y1, x2, y2], color])
 
 	def save_fig(self, image_path):
+		self.image = self.image.astype(np.uint8)
 		pil_image = Image.fromarray(self.image)
 		draw = ImageDraw.Draw(pil_image)
 		for l in self.labels:

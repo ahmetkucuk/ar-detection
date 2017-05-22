@@ -12,6 +12,7 @@ input_image_size = 128
 
 
 def preprocess(image, image_size):
+	image = image.astype(np.uint8)
 	image = Image.fromarray(image)
 	im = image.convert("L")
 	im = im.resize(size=(image_size, image_size))
@@ -67,6 +68,7 @@ def main(args):
 if __name__ == "__main__":
 	main(sys.argv[1:])
 
+# args = ["data/20170211_001146_4096_0171.jpg", "test.png", "/Users/ahmetkucuk/Documents/log_test/"]
 # args = ["data/2013_05_10__23_59_47_34__SDO_AIA_AIA_171.png", "test.png", "/Users/ahmetkucuk/Documents/log_test/"]
-#main(args)
-#python "/home/ahmet/workspace/data/ar-detection/2013_05_10__23_59_47_34__SDO_AIA_AIA_171.png", "data/labels.png", "/home/ahmet/workspace/tensorboard/lenet/mode_100.ckpt"
+# main(args)
+# python "/home/ahmet/workspace/data/ar-detection/2013_05_10__23_59_47_34__SDO_AIA_AIA_171.png", "data/labels.png", "/home/ahmet/workspace/tensorboard/lenet/mode_100.ckpt"

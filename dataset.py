@@ -77,28 +77,6 @@ def preprocess(images, image_size):
 		processed_images.append(im_array)
 	return processed_images
 
-'''
-class GPUDataset(object):
-
-	def __init__(self, data, labels):
-		self.n_of_records = len(data)
-		with tf.device('/cpu:0'):
-			gpu_data = tf.constant(np.array(data))
-			gpu_labels = tf.constant(labels)
-			self.image, self.label = tf.train.slice_input_producer(
-				[gpu_data, gpu_labels])
-			self.label = tf.cast(self.label, tf.int32)
-
-	def next_batch(self, batch_size):
-		print("hereee")
-		images, labels = tf.train.batch(
-			[self.image, self.label], batch_size=batch_size)
-		print("hereee2")
-		return images, labels
-
-	def size(self):
-		return self.n_of_records
-'''
 
 class ARDataset(object):
 
